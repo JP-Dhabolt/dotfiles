@@ -17,6 +17,7 @@
     ~/.bash_aliases: bash_aliases
     ~/.bash_env: bash_env
     ~/.git_completion.bash: git_completion.bash
+    ~/.ideavimrc: ideavimrc
 
 - create:
     - ~/tmp

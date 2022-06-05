@@ -1,0 +1,84 @@
+" Map leader to comma {{{
+let mapleader=","
+" }}}
+
+" Plugins {{{
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
+set NERDTree
+" }}}
+
+" Plugin setting {{{
+let g:argtextobj_pairs="[:],(:),<:>"
+" }}}
+
+" Tab settings {{{
+set tabstop=4                     " number of visual spaces per TAB
+set softtabstop=4                 " number of spaces in tab when editing
+set shiftwidth=4                  " number of spaces for displaying code indents
+set expandtab                     " tabs are spaces
+" }}}
+
+" UI Layout {{{
+syntax enable                     " enable syntax
+set nocompatible                  " Do not try to be vi
+set showcmd                       " show command in bottom bar
+set cursorline                    " highlight current line
+filetype plugin on                " Enable plugins
+filetype indent on                " load filetype-specific indent files
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+set wildmenu                      " visual autocomplete for command menu
+set lazyredraw                    " redraw only when needed
+set showmatch                     " highlight matching [{()}]
+set termguicolors
+" }}}
+
+" Search settings {{{
+set incsearch                     " search as characters are entered
+set hlsearch                      " highlights matches
+" Turn off search highlighting by pressing ,<space>
+nnoremap <leader><space> :nohlsearch<CR>
+" }}}
+
+" Folding {{{
+set foldenable                    " enable folding
+set foldlevelstart=10             " open most folds by default
+set foldnestmax=10                " 10 nested fold max
+set foldmethod=indent             " fold based on indent level
+" }}}
+
+" Modelines {{{
+set modeline
+set modelines=1
+" }}}
+
+" Mappings {{{
+map <leader>d <Action>(Debug)
+map <leader>r <Action>(RenameElement)
+map gp <Action>(GotoNextError)
+map <leader>ff <Action>(ReformatCode)
+map <leader>fc <Action>(SilentCodeCleanup)
+map gh <Action>(ShowErrorDescription)
+map gH <Action>(QuickImplementations)
+map <leader>fe :NERDTreeToggle<CR>
+map <leader>p <Action>(SearchEverywhere)
+" <space> some sort of mapping to toggle folds
+" }}}
+
+" File Extension Overrides {{{
+augroup vimrc
+  autocmd!
+  autocmd BufNewFile,BufRead *.yml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  autocmd BufNewFile,BufRead *.md setlocal shiftwidth=4 tabstop=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.js setlocal shiftwidth=2 tabstop=2 softtabstop=2
+augroup END
+" }}}
+
+" vim: set foldmethod=marker foldlevel=0:

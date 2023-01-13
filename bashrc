@@ -124,3 +124,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# setup git_completion if it exists
+test -f ~/.git_completion.bash && . $_

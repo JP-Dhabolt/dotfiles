@@ -7,18 +7,6 @@ if [ -f ~/.bash_env ]; then
     . ~/.bash_env
 fi
 
-# Set up SSH Agent regardless of running interactively or not
-if [ -z "$SSH_AUTH_SOCK" ]; then
-   # Check for a currently running instance of the agent
-   RUNNING_AGENT="`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
-   if [ "$RUNNING_AGENT" = "0" ]; then
-        # Launch a new instance of the agent
-        ssh-agent -s &> ~/.ssh/ssh-agent
-   fi
-   eval `cat ~/.ssh/ssh-agent`
-   ssh-add
-fi
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -78,11 +66,7 @@ parse_git_branch() {
 }
 
 if [ "$color_prompt" = yes ]; then
-    if type __git_ps1 | grep -q 'is a function' 2>/dev/null; then
-        PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0;31m\]$(__git_ps1)\[\033[00m\]\$ '
-    else
-        PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0;31m\]$(parse_git_branch)\[\033[00m\]\$ '
-    fi
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0;31m\]$(parse_git_branch)\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -138,7 +122,5 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-  elif [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
   fi
 fi

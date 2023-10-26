@@ -66,10 +66,10 @@ map gp <Action>(GotoNextError)
 map <leader>ff <Action>(ReformatCode)
 map <leader>fc <Action>(SilentCodeCleanup)
 map gh <Action>(ShowErrorDescription)
-map gH <Action>(QuickImplementations)
+map gH <Action>(QuickJavaDoc)
 map <leader>fe :NERDTreeToggle<CR>
 map <leader>p <Action>(SearchEverywhere)
-" <space> some sort of mapping to toggle folds
+map <space> <Action>(ExpandCollapseToggleAction)
 " }}}
 
 " File Extension Overrides {{{

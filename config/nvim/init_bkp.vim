@@ -27,6 +27,7 @@ set termguicolors
 " Search settings {{{
 set incsearch                     " search as characters are entered
 set hlsearch                      " highlights matches
+set ignorecase                    " case insensitive search
 " Turn off search highlighting by pressing ,<space>
 nnoremap <leader><space> :nohlsearch<CR>
 " }}}

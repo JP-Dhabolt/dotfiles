@@ -22,6 +22,6 @@
 - create:
     - ~/tmp
 
-- shell:
-  - [./config/nvim/install_vim_plug.sh, Installing VimPlug]
+# - shell:
+#   - [./config/nvim/install_vim_plug.sh, Installing VimPlug]
 

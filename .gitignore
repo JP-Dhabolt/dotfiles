@@ -1,2 +1,8 @@
 config/nvim/.netrwhist
 
+tags
+test.sh
+.luarc.json
+spell/
+lazy-lock.json
+

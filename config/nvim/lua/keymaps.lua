@@ -15,5 +15,10 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = '[J]oin lines' })
 
--- This won't work in all terminals, flalback to <C-\><C-n>
+-- This won't work in all terminals, fallback to <C-\><C-n>
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Automatically execute and/or source
+vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Source current file' })
+vim.keymap.set('n', '<leader>x', ':.lua<CR>', { desc = 'e[X]ecute the file' })
+vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = 'e[X]ecute the selection' })

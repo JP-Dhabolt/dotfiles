@@ -49,6 +49,8 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       { '<leader>k', group = 'Vimwi[K]i' },
       { '<leader>k<leader>', group = 'Vimwiki Create' },
+      { '<leader>g', group = '[G]enAI' },
+      mode = { 'n' },
     },
   },
 }

@@ -1,9 +1,34 @@
--- Line numbers
-vim.o.number = true
-vim.o.relativenumber = true
+if not vim.g.vscode then
+  -- Neovim native exclusive options go here
 
--- enable mouse mode, useful for resizing splits
-vim.o.mouse = 'a'
+  -- Line numbers
+  vim.o.number = true
+  vim.o.relativenumber = true
+
+  -- enable mouse mode, useful for resizing splits
+  vim.o.mouse = 'a'
+
+  -- Minimal number of screen lines to keep above and below the cursor.
+  vim.o.scrolloff = 20
+
+  -- Set cursor for modes
+  vim.opt.guicursor = 'n-v:block,c-i-ci-ve:ver25,r-cr:hor20'
+
+  vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+    callback = function()
+      vim.opt.number = false
+      vim.opt.relativenumber = false
+      vim.cmd 'startinsert!'
+    end,
+  })
+
+  if os.getenv 'NVIM_PYENV_LOC' then
+    vim.g.python3_host_prog = os.getenv 'NVIM_PYENV_LOC'
+  end
+end
+
+-- Global options that apply to vscode and regular neovim go here
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
@@ -49,14 +74,8 @@ vim.o.inccommand = 'split'
 -- Show which line your cursor is on
 vim.o.cursorline = true
 
--- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 20
-
 -- Raise a dialog instead of failing op due to unsaved changes
 vim.o.confirm = true
-
--- Set cursor for modes
-vim.opt.guicursor = 'n-v:block,c-i-ci-ve:ver25,r-cr:hor20'
 
 -- Folding
 vim.o.foldenable = true
@@ -73,16 +92,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
-
-vim.api.nvim_create_autocmd('TermOpen', {
-  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
-  callback = function()
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-    vim.cmd 'startinsert!'
-  end,
-})
-
-if os.getenv 'NVIM_PYENV_LOC' then
-  vim.g.python3_host_prog = os.getenv 'NVIM_PYENV_LOC'
-end

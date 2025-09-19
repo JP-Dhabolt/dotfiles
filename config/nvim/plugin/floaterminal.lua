@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local state = {
   floating = {
     buf = -1,
@@ -19,6 +23,7 @@ local function create_floating_terminal(opts)
   else
     buf = vim.api.nvim_create_buf(false, true)
   end
+  vim.bo[buf].buflisted = false
 
   local win_config = {
     relative = 'editor',

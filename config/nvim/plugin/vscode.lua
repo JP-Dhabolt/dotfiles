@@ -69,10 +69,20 @@ vim.keymap.set('n', '-', function()
   vs.call 'workbench.view.explorer'
 end, { desc = 'Open [E]xplorer' })
 
+-- Sidebar
+vim.keymap.set('n', '<leader>-', function()
+  vs.call 'workbench.action.toggleSidebarVisibility'
+end, { desc = 'Toggle Sidebar' })
+
 -- Rename
 vim.keymap.set('n', 'grn', function()
   vs.call 'editor.action.rename'
 end, { desc = '[G]oto [R]e[N]ame' })
+
+-- Refactor
+vim.keymap.set({ 'n', 'v' }, 'grf', function()
+  vs.call 'editor.action.refactor'
+end, { desc = '[G]oto [R]e[F]actor' })
 
 -- Open File Symbols
 vim.keymap.set('n', 'gO', function()
@@ -83,3 +93,8 @@ end, { desc = 'Open Document Symbols' })
 vim.keymap.set('n', 'gW', function()
   vs.call 'workbench.action.showAllSymbols'
 end, { desc = 'Open Workspace Symbols' })
+
+-- Select Language Mode
+vim.keymap.set('n', '<leader>l', function()
+  vs.call 'workbench.action.editor.changeLanguageMode'
+end, { desc = 'Change [L]anguage Mode' })

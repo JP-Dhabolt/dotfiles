@@ -84,6 +84,11 @@ vim.keymap.set({ 'n', 'v' }, 'grf', function()
   vs.call 'editor.action.refactor'
 end, { desc = '[G]oto [R]e[F]actor' })
 
+-- Peek References
+vim.keymap.set('n', 'gtr', function()
+  vs.call 'editor.action.goToReferences'
+end, { desc = '[G]oto [T]o [R]eferences' })
+
 -- Open File Symbols
 vim.keymap.set('n', 'gO', function()
   vs.call 'workbench.action.gotoSymbol'

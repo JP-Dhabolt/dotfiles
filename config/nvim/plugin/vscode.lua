@@ -103,3 +103,11 @@ end, { desc = 'Open Workspace Symbols' })
 vim.keymap.set('n', '<leader>l', function()
   vs.call 'workbench.action.editor.changeLanguageMode'
 end, { desc = 'Change [L]anguage Mode' })
+
+-- Remove Keybindings that cause conflicts
+
+-- Keybinds to make split navigation easier.
+vim.keymap.set('n', '<C-h>', '<Nop>')
+vim.keymap.set('n', '<C-l>', '<Nop>')
+vim.keymap.set('n', '<C-j>', '<Nop>')
+vim.keymap.set('n', '<C-k>', '<Nop>')

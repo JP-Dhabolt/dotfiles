@@ -6,7 +6,7 @@ return {
   },
   build = 'make tiktoken',
   opts = {
-    model = 'gpt-4.1', -- AI model to use
+    model = 'claude-sonnet-4.6', -- AI model to use
     temperature = 0.1, -- Lower = focused, higher = creative
     window = {
       layout = 'float', -- 'vertical', 'horizontal', 'float'

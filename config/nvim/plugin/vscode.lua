@@ -2,6 +2,15 @@ if not vim.g.vscode then
   return
 end
 
+-- Set up VSCode Plugins
+vim.pack.add {
+  'https://github.com/nvim-mini/mini.nvim',
+}
+-- Better Around/Inside textobjects
+require('mini.ai').setup { n_lines = 500 }
+-- Add/delete/replace surroundings (brackets, quotes, etc.)
+require('mini.surround').setup()
+
 -- Without the keymap plugin, I need a longer timeout
 vim.o.timeoutlen = 1000
 

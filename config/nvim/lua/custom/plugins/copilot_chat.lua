@@ -23,6 +23,7 @@ return {
     vim.keymap.set('n', '<leader>gt', '<cmd>CopilotChatToggle<cr>', { desc = '[T]oggle Copilot Chat' })
     vim.keymap.set('n', '<leader>go', '<cmd>CopilotChatOpen<cr>', { desc = '[O]pen Copilot Chat' })
     vim.keymap.set('n', '<leader>gr', '<cmd>CopilotChatReset<cr>', { desc = '[R]eset Copilot Chat' })
+    vim.treesitter.language.register('off', { 'copilot-chat', 'copilot-diff', 'copilot-overlay' })
     vim.api.nvim_create_autocmd('BufEnter', {
       pattern = 'copilot-*',
       callback = function()

@@ -1,5 +1,3 @@
-vim.notify 'Loading custom pyright config'
-
 local function set_python_path(command)
   local path = command.args
   local clients = vim.lsp.get_clients {
@@ -39,7 +37,6 @@ return {
     })
     local set_poetry_venv_cmd = function()
       local workspace = client.config.root_dir or vim.fn.getcwd()
-      local python_path = get_poetry_venv_python(workspace)
       set_python_path { args = get_poetry_venv_python(workspace) or '' }
     end
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lp', '', {

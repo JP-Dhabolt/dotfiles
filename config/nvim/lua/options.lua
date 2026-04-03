@@ -82,6 +82,7 @@ vim.o.foldenable = true
 vim.o.foldlevelstart = 10
 vim.o.foldnestmax = 10
 vim.o.foldmethod = 'indent'
+vim.o.modeline = true
 
 -- Autocommands
 -- Highlight when yanking (copying) text

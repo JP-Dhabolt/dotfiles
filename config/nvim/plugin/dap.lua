@@ -28,6 +28,7 @@ vim.keymap.set({ 'n' }, '<leader>dl', '<cmd>DapOpenLog<CR>', { desc = '[D]ebug [
 vim.keymap.set({ 'n' }, '<leader>ds', '<cmd>DapDisconnect<CR>', { desc = '[D]ebug [S]top' })
 vim.keymap.set({ 'n' }, '<S-F5>', '<cmd>DapDisconnect<CR>', { desc = '[D]ebug [S]top' })
 vim.keymap.set({ 'n' }, '<leader>de', function()
+  ---@diagnostic disable-next-line: missing-fields
   dapui.eval(nil, { enter = true })
 end, { desc = '[D]ebug [E]valuate' })
 

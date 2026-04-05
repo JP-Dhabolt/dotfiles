@@ -27,6 +27,9 @@ vim.keymap.set({ 'n' }, '<C-F5>', '<cmd>DapContinue<CR>', { desc = 'Debug Resume
 vim.keymap.set({ 'n' }, '<leader>dl', '<cmd>DapOpenLog<CR>', { desc = '[D]ebug [L]og' })
 vim.keymap.set({ 'n' }, '<leader>ds', '<cmd>DapDisconnect<CR>', { desc = '[D]ebug [S]top' })
 vim.keymap.set({ 'n' }, '<S-F5>', '<cmd>DapDisconnect<CR>', { desc = '[D]ebug [S]top' })
+vim.keymap.set({ 'n' }, '<leader>de', function()
+  dapui.eval(nil, { enter = true })
+end, { desc = '[D]ebug [E]valuate' })
 
 require('nvim-launch').setup {
   tmux_pane = 1,

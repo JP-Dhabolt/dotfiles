@@ -419,8 +419,6 @@ local mason_tool_names = {
   'gdtoolkit',
   'lua-language-server',
   'zls',
-  -- DAP
-  'debugpy',
 }
 local lsp_servers = {
   'stylua', -- Used to format Lua code
@@ -561,7 +559,7 @@ vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iag
 vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>sn', require('telescope').extensions.fidget.fidget, { desc = '[S]earch [N]otifications' })
+vim.keymap.set('n', '<leader>sN', require('telescope').extensions.fidget.fidget, { desc = '[S]earch [N]otifications' })
 
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set('n', '<leader>/', function()

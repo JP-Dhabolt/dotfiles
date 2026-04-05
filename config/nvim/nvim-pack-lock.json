@@ -42,6 +42,10 @@
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
+    "mason-nvim-dap.nvim": {
+      "rev": "9a10e096703966335bd5c46c8c875d5b0690dade",
+      "src": "https://github.com/jay-babu/mason-nvim-dap.nvim"
+    },
     "mason-tool-installer.nvim": {
       "rev": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc",
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
@@ -65,6 +69,10 @@
     "nvim-dap": {
       "rev": "4f5deb110d9ff8994d96c21df95e2271d11214f9",
       "src": "https://codeberg.org/mfussenegger/nvim-dap"
+    },
+    "nvim-dap-python": {
+      "rev": "1808458eba2b18f178f990e01376941a42c7f93b",
+      "src": "https://codeberg.org/mfussenegger/nvim-dap-python"
     },
     "nvim-dap-ui": {
       "rev": "d9770a55188bb34c2bdce7d90a6151181beb6966",
@@ -114,10 +122,6 @@
     "vim-code-dark": {
       "rev": "4624dc223bf574aa9a731c2383c579847303c380",
       "src": "https://github.com/tomasiser/vim-code-dark"
-    },
-    "vscodium.nvim": {
-      "rev": "4152ff1fe97378c718ada1395f108f836207adba",
-      "src": "https://github.com/guysoft/vscodium.nvim"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",

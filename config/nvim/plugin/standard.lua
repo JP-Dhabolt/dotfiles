@@ -408,6 +408,7 @@ vim.lsp.config('*', {
 })
 
 local mason_tool_names = {
+  -- LSP
   'stylua',
   'gopls',
   'pyright',
@@ -415,6 +416,8 @@ local mason_tool_names = {
   'gdtoolkit',
   'lua-language-server',
   'zls',
+  -- DAP
+  'debugpy',
 }
 local lsp_servers = {
   'stylua', -- Used to format Lua code
@@ -665,6 +668,7 @@ require('which-key').setup {
     { '<leader>k', group = 'Vimwi[K]i' },
     { '<leader>k<leader>', group = 'Vimwiki Create' },
     { '<leader>g', group = '[G]enAI' },
+    { '<leader>d', group = '[D]ebug' },
     mode = { 'n' },
   },
 }

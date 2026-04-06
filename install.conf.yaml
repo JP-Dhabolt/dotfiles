@@ -18,10 +18,7 @@
     ~/.bash_env: bash_env
     ~/.git_completion.bash: git_completion.bash
     ~/.ideavimrc: ideavimrc
+    ~/.tmux.conf: tmux.conf
 
 - create:
     - ~/tmp
-
-# - shell:
-#   - [./config/nvim/install_vim_plug.sh, Installing VimPlug]
-

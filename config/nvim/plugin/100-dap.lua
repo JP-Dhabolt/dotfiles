@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 vim.pack.add {
   'https://codeberg.org/mfussenegger/nvim-dap',
   'https://github.com/nvim-neotest/nvim-nio',

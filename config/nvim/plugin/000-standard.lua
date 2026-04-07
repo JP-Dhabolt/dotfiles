@@ -162,12 +162,12 @@ require('CopilotChat').setup {
   model = 'claude-sonnet-4.6', -- AI model to use
   temperature = 0.1, -- Lower = focused, higher = creative
   window = {
-    layout = 'float', -- 'vertical', 'horizontal', 'float'
-    width = 0.8, -- 50% of screen width
-    height = 0.8, -- 80% of screen height
-    border = 'rounded', -- Border style
+    layout = 'vertical', -- 'vertical', 'horizontal', 'float'
+    width = 0.3, -- 50% of screen width
+    height = 1, -- 80% of screen height
+    -- border = 'rounded', -- Border style
     title = '🤖 AI Assistant',
-    zindex = 100,
+    -- zindex = 100,
   },
   auto_insert_mode = true, -- Enter insert mode when opening
 }
@@ -175,6 +175,56 @@ require('CopilotChat').setup {
 vim.keymap.set('n', '<leader>gt', '<cmd>CopilotChatToggle<cr>', { desc = '[T]oggle Copilot Chat' })
 vim.keymap.set('n', '<leader>go', '<cmd>CopilotChatOpen<cr>', { desc = '[O]pen Copilot Chat' })
 vim.keymap.set('n', '<leader>gr', '<cmd>CopilotChatReset<cr>', { desc = '[R]eset Copilot Chat' })
+vim.keymap.set('n', '<leader>gs', function()
+  vim.ui.input({ prompt = 'Save chat as: ' }, function(name)
+    if name and name ~= '' then
+      local timestamp = os.date '%Y-%m-%dT%H-%M-%S'
+      vim.cmd('CopilotChatSave ' .. timestamp .. '-' .. name)
+    end
+  end)
+end, { desc = '[S]ave Copilot Chat' })
+vim.keymap.set('n', '<leader>gl', function()
+  local cc = require 'CopilotChat'
+  local files = vim.fn.glob(cc.config.history_path .. '/*.json', false, true)
+  if #files == 0 then
+    vim.notify('No saved Copilot Chat conversations found', vim.log.levels.WARN)
+    return
+  end
+  local names = vim.tbl_map(function(f)
+    return vim.fn.fnamemodify(f, ':t:r')
+  end, files)
+  vim.ui.select(names, { prompt = 'Load Copilot Chat: ' }, function(name)
+    if name and name ~= '' then
+      vim.cmd('CopilotChatLoad ' .. name)
+    end
+  end)
+end, { desc = '[L]oad Copilot Chat' })
+vim.keymap.set('n', '<leader>gd', function()
+  local cc = require 'CopilotChat'
+  local files = vim.fn.glob(cc.config.history_path .. '/*.json', false, true)
+  if #files == 0 then
+    vim.notify('No saved Copilot Chat conversations found', vim.log.levels.WARN)
+    return
+  end
+  local names = vim.tbl_map(function(f)
+    return vim.fn.fnamemodify(f, ':t:r')
+  end, files)
+  vim.ui.select(names, { prompt = 'Delete Copilot Chat: ' }, function(name)
+    if name and name ~= '' then
+      vim.ui.input({ prompt = 'Delete "' .. name .. '"? (y/N): ' }, function(confirm)
+        if confirm and confirm:lower() == 'y' then
+          local path = cc.config.history_path .. '/' .. name .. '.json'
+          local ok, err = os.remove(path)
+          if ok then
+            vim.notify('Deleted Copilot Chat: ' .. name)
+          else
+            vim.notify('Failed to delete: ' .. err, vim.log.levels.ERROR)
+          end
+        end
+      end)
+    end
+  end)
+end, { desc = '[D]elete Copilot Chat' })
 -- vim.treesitter.language.register('off', { 'copilot-chat', 'copilot-diff', 'copilot-overlay' })
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = 'copilot-*',

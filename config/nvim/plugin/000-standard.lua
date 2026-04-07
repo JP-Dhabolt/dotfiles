@@ -225,13 +225,16 @@ vim.keymap.set('n', '<leader>gd', function()
     end
   end)
 end, { desc = '[D]elete Copilot Chat' })
+vim.keymap.set('n', '<leader>gm', '<cmd>CopilotChatModels<cr>', { desc = 'Select [M]odel' })
 -- vim.treesitter.language.register('off', { 'copilot-chat', 'copilot-diff', 'copilot-overlay' })
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = 'copilot-*',
   callback = function()
+    local cc_config = require 'CopilotChat.config'
     vim.opt_local.relativenumber = false
     vim.opt_local.number = false
     vim.opt_local.conceallevel = 0
+    vim.wo.winbar = '%=model: %#Comment#' .. (cc_config.model or 'unknown') .. ' '
   end,
 })
 -- }}}

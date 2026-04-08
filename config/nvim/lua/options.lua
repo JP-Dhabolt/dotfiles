@@ -12,7 +12,9 @@ if not vim.g.vscode then
   vim.o.scrolloff = 20
 
   -- Set cursor for modes
-  vim.opt.guicursor = 'n-v:block,c-i-ci-ve:ver25,r-cr:hor20'
+  local cursor = 'n-v:block,c-i-ci-ve:ver25,r-cr:hor20,t:ver25'
+
+  vim.opt.guicursor = cursor
 
   vim.api.nvim_create_autocmd('TermOpen', {
     group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
@@ -20,6 +22,20 @@ if not vim.g.vscode then
       vim.opt.number = false
       vim.opt.relativenumber = false
       vim.cmd 'startinsert!'
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('TermEnter', {
+    group = vim.api.nvim_create_augroup('custom-term-cursor', { clear = true }),
+    callback = function()
+      vim.opt.guicursor = 'a:ver25'
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('TermLeave', {
+    group = 'custom-term-cursor',
+    callback = function()
+      vim.opt.guicursor = cursor
     end,
   })
 

@@ -11,6 +11,9 @@ if not vim.g.vscode then
   -- Minimal number of screen lines to keep above and below the cursor.
   vim.o.scrolloff = 20
 
+  -- Set the number format to allow for correct date manipulation
+  vim.o.nrformats = 'unsigned'
+
   -- Set cursor for modes
   local cursor = 'n-v:block,c-i-ci-ve:ver25,r-cr:hor20,t:ver25'
 

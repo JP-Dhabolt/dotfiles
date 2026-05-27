@@ -103,6 +103,11 @@ vim.o.foldnestmax = 10
 vim.o.foldmethod = 'indent'
 vim.o.modeline = true
 
+-- Indentation
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+
 -- Autocommands
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {

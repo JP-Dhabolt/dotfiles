@@ -61,6 +61,15 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# set git aliases
+_set_git_aliases() {
+    git config --global alias.new '!f() { git fetch origin && git switch --no-track -c "$1" origin/main; }; f'
+    git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+}
+
+_set_git_aliases 2>/dev/null || true
+unset -f _set_git_aliases
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }

@@ -472,6 +472,8 @@ local mason_tool_names = {
   'gdtoolkit',
   'lua-language-server',
   'zls',
+  'codelldb',
+  'ols',
 }
 local lsp_servers = {
   'stylua', -- Used to format Lua code
@@ -481,6 +483,7 @@ local lsp_servers = {
   'gdtoolkit', -- Game Development Toolkit LSP Server
   'lua_ls', -- Lua LSP Server
   'zls', -- Zig LSP Server
+  'ols', -- Odin LSP Server
 }
 require('mason-tool-installer').setup { ensure_installed = mason_tool_names }
 
@@ -578,15 +581,42 @@ vim.keymap.set('n', '<Leader>-', '<CMD>Oil<CR>', { desc = 'Open parent directory
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local yank_selected = function()
+  local action_state = require 'telescope.actions.state'
+  local entry = action_state.get_selected_entry()
+  if not entry then
+    vim.notify('No entry selected', vim.log.levels.WARN)
+    return
+  end
+
+  local value = entry.value
+  local text_to_copy = nil
+
+  -- If string, use it directly
+  if type(value) == 'string' then
+    text_to_copy = value
+  -- If table with a 'message' field, use that
+  elseif type(value) == 'table' and value.message then
+    text_to_copy = value.message
+  end
+
+  if text_to_copy then
+    vim.fn.setreg('+', text_to_copy)
+  else
+    local inspect_output = vim.inspect(value)
+    vim.fn.setreg('+', inspect_output)
+    vim.notify('Copied entry to clipboard (inspected output)', vim.log.levels.INFO)
+  end
+end
 require('telescope').setup {
   -- You can put your default mappings / updates / etc. in here
   --  All the info you're looking for is in `:help telescope.setup()`
   --
-  -- defaults = {
-  --   mappings = {
-  --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-  --   },
-  -- },
+  defaults = {
+    mappings = {
+      n = { ['Y'] = yank_selected },
+    },
+  },
   -- pickers = {}
   extensions = {
     ['ui-select'] = {
@@ -658,6 +688,7 @@ local ensure_installed = {
   'query',
   'vim',
   'vimdoc',
+  'odin',
 }
 require('nvim-treesitter').setup {
   -- Autoinstall languages that are not installed

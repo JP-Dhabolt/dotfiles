@@ -8,6 +8,7 @@ vim.pack.add {
   'https://github.com/rcarriga/nvim-dap-ui',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
   'https://codeberg.org/mfussenegger/nvim-dap-python',
+  'https://github.com/NANDquark/nvim-dap-odin',
 }
 
 local is_windows = vim.fn.has 'win32' == 1 or vim.fn.has 'win64' == 1
@@ -16,7 +17,31 @@ local dap = require 'dap'
 local dapui = require 'dapui'
 dapui.setup()
 require('mason-nvim-dap').setup {
-  ensure_installed = { 'debugpy' },
+  ensure_installed = { 'debugpy', 'codelldb' },
+  handlers = {
+    function(config)
+      -- Keep original functionality
+      require('mason-nvim-dap').default_setup(config)
+    end,
+    codelldb = function(config)
+      local mason_path = vim.fn.stdpath('data') .. '/mason/packages/codelldb/extension/'
+      local adapter_path = mason_path .. 'adapter/codelldb' .. (is_windows and '.exe' or '')
+
+      local lib_ext = is_windows and 'liblldb.dll' or (vim.fn.has('mac') == 1 and 'liblldb.dylib' or 'liblldb.so')
+      local lib_dir = is_windows and 'lldb/bin/' or 'lldb/lib/'
+      local liblldb_path = mason_path .. lib_dir .. lib_ext
+
+      config.adapters = {
+        type = 'server',
+        port = '${port}',
+        executable = {
+          command = adapter_path,
+          args = { '--port', '${port}', '--liblldb', liblldb_path },
+        },
+      }
+      require('mason-nvim-dap').default_setup(config)
+    end,
+  }
 }
 
 vim.keymap.set({ 'n' }, '<leader>du', dapui.toggle, { desc = 'Toggle DAP [U]I' })
@@ -43,3 +68,4 @@ end, { desc = '[D]ebug [E]valuate' })
 local mason_debugpy = vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/' .. python_bin
 local debugpy_python = os.getenv 'NVIM_DEBUGPY_PYTHON' or (vim.fn.executable(mason_debugpy) == 1 and mason_debugpy) or 'python'
 require('dap-python').setup(debugpy_python)
+require('nvim-dap-odin').setup()

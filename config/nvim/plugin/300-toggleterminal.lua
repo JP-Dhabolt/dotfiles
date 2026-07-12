@@ -35,7 +35,7 @@ local toggle_terminal = function()
   if not vim.api.nvim_win_is_valid(state.bottom.win) then
     state.bottom = create_bottom_terminal { buf = state.bottom.buf }
     if vim.bo[state.bottom.buf].buftype ~= 'terminal' then
-      vim.cmd.term()
+      vim.cmd.term(vim.g.user_shell)
     end
     vim.cmd 'startinsert!'
   else

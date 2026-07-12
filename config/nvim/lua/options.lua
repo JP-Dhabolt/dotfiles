@@ -24,7 +24,6 @@ if not vim.g.vscode then
     callback = function()
       vim.opt.number = false
       vim.opt.relativenumber = false
-      vim.cmd 'startinsert!'
     end,
   })
 
@@ -45,6 +44,17 @@ if not vim.g.vscode then
   if os.getenv 'NVIM_PYENV_LOC' then
     vim.g.python3_host_prog = os.getenv 'NVIM_PYENV_LOC'
   end
+end
+
+vim.g.user_shell = vim.o.shell
+-- Windows specific options go here
+if vim.fn.has 'win32' == 1 or vim.fn.has 'win64' == 1 then
+  vim.o.shell = 'cmd.exe'
+  vim.o.shellcmdflag = '/c'
+  vim.o.shellredir = '>%s 2>&1'
+  vim.o.shellpipe = '2>&1| tee'
+  vim.o.shellquote = ''
+  vim.o.shellxquote = ''
 end
 
 -- Global options that apply to vscode and regular neovim go here

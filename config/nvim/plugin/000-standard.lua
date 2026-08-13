@@ -609,6 +609,19 @@ local yank_selected = function()
   end
 end
 require('telescope').setup {
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden',
+      '--glob=!.git/',
+    },
+  },
   -- You can put your default mappings / updates / etc. in here
   --  All the info you're looking for is in `:help telescope.setup()`
   --

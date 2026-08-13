@@ -621,15 +621,13 @@ require('telescope').setup {
       '--hidden',
       '--glob=!.git/',
     },
-  },
-  -- You can put your default mappings / updates / etc. in here
-  --  All the info you're looking for is in `:help telescope.setup()`
-  --
-  defaults = {
     mappings = {
       n = { ['Y'] = yank_selected },
     },
   },
+  -- You can put your default mappings / updates / etc. in here
+  --  All the info you're looking for is in `:help telescope.setup()`
+  --
   -- pickers = {}
   extensions = {
     ['ui-select'] = {

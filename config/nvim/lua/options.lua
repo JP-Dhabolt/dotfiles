@@ -14,6 +14,9 @@ if not vim.g.vscode then
   -- Set the number format to allow for correct date manipulation
   vim.o.nrformats = 'unsigned'
 
+  -- Set concealed text to be hidden unless on the line
+  vim.o.conceallevel = 1
+
   -- Set cursor for modes
   local cursor = 'n-v:block,c-i-ci-ve:ver25,r-cr:hor20,t:ver25'
 

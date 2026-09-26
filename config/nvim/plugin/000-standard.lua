@@ -86,6 +86,7 @@ vim.pack.add {
   'https://github.com/j-hui/fidget.nvim', -- Useful status updates for LSP
   'https://github.com/neovim/nvim-lspconfig', -- Collection of common configurations for built-in LSP client
   'https://github.com/nvim-treesitter/nvim-treesitter', -- Treesitter configurations and abstraction layer
+  'https://github.com/obsidian-nvim/obsidian.nvim', -- Obsidian integration
 }
 
 require('guess-indent').setup {} -- guess-indent configuration
@@ -770,5 +771,34 @@ require('which-key').setup {
     mode = { 'n' },
   },
 }
+-- }}}
+
+-- Obsidian.nvim configuration {{{
+-- For workspaces, read the envvar $OBSIDIAN_VAULTS, which is a comma separated list of vaults.
+-- Each vault is a pipe separated pair of vault name and path. For example:
+--   vault1|/path/to/vault1,vault2|/path/to/vault2
+local vaults_env = vim.fn.getenv('OBSIDIAN_VAULTS')
+local workspaces = {}
+if vaults_env then
+  for vault in string.gmatch(vaults_env, '([^,]+)') do
+    local name, path = vault:match('([^:]+)|(.+)')
+    if name and path then
+      table.insert(workspaces, { name = name, path = path })
+    else
+      vim.notify('Invalid vault format: ' .. vault, vim.log.levels.WARN)
+    end
+  end
+end
+if vim.tbl_isempty(workspaces) then
+  vim.notify('No Obsidian vaults found in $OBSIDIAN_VAULTS', vim.log.levels.WARN)
+else
+  require('obsidian').setup {
+    picker = {
+      name = "telescope.nvim",
+    },
+    legacy_commands = false, -- Will be removed in 4.0.0
+    workspaces = workspaces,
+  }
+end
 -- }}}
 -- vim: foldmethod=marker foldlevel=0
